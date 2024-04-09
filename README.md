@@ -1,13 +1,11 @@
-# Monitoring 101
+# Monitoring 101 👀
 
-[See monitoring report](./lets_monitor_our_shit.md)
+[See the monitoring report exercise](./lets_monitor_our_shit.md)
 
-<!-- @import "[TOC]" {cmd="toc" depthFrom=1 depthTo=6 orderedList=false} -->
-
-<!-- code_chunk_output -->
-
+**Table of contents**
 - [Monitoring 101](#monitoring-101)
-  - [Goals](#goals)
+  - [Learning goals](#learning-goals)
+    - [Questions to answer](#questions-to-answer)
   - [Processor and processes](#processor-and-processes)
   - [Linux system monitoring tools](#linux-system-monitoring-tools)
   - [Log files](#log-files)
@@ -23,14 +21,12 @@
     - [`ss`](#ss)
   - [For next project](#for-next-project)
 
-<!-- /code_chunk_output -->
-
 ## Learning goals
 
 + How to monitor a Linux system 
 + What to look for ?
 
-**Questions to answer**
+### Questions to answer
 + What are the main area of concern when monitoring a system? (EX: CPU load, disk usage, ...)
 + How can you check what are the most memory intensive running processes ?
 + What are log files? Where can you find them on a typical Linux system ?
@@ -39,16 +35,85 @@
 + How can you check the uptime of a machine ?
 + How can you assess the network traffic ?
 
+---
+
+What are the main area of concern when monitoring a system? What processes are running on a system at a given moment ?
+Which user ran which commands ? 
+How much of the CPU and memory are the processes taking ?
+
 ## Processor and processes
 
 What is a process ?
 
-`ps` to display active processes
+### `ps`
+
+The command `ps` allows us to see all processes running in a system.  
+We can also sort the results by users, CPU load, memory used...
+
+**Displays active processes**
+`ps` 
+
+**Display all processes in the system**
+_Not only the processes started by a user or in a terminal session, but also those launched by the system_
+`ps -e`
+
+**Displays more information about the process**
+`ps -ef` 
+
+**PID**: proces ID
+**PPID**: parent process ID
+🚧 **C**
+🚧 **TTY**
+🚧 **CMD**
 
 
-## Linux system monitoring tools
-+ `top ` command displays linux processes in CPU activity order, installed by default
-+ `htop`, a better top, needs to be installed, uses **ncurses** for its displays 
+**ps -ef outputs**
+We can see here that the first process is `/sbin/init`, it's the process in charge of **booting** our server.
+![ps -ef output](assets/ps_output_01.png)
+
+We can see that TTY value is **pts/0**, which stands for pseudo terminal #0.
+It is the terminal session that I started via ssh from my main machine on which I connected to ssh to the server.
+We can see that we run the command `ps -ef` from this terminal. 
+![ps -ef output](assets/ps_output_02.png)
+
+**tty1** is a session on the system's first virtual console, possibly accessed directly from the machine's physical input and output devices.
+
+[More about pts and tty](https://www.baeldung.com/linux/pty-vs-tty)
+
+**Filter by user**
+`ps -edf | grep <user>`
+
+**Display the 5 most memory intensive processes** 
+`ps -edf --sort=+pmem | tail -5`
+
+**Display the 5 most cpu demanding processes** 
+`ps -edf --sort=+pcpu | tail -5`
+
+### `top`, `htop`...
+
+### `top`
+The `top` command displays linux processes in CPU activity order.  
+It is installed by default on a lot of distributions.
+It is the equivalent of the task manager in Windows system.
+Press `h` to have the documentation
+
+![top output](assets/top_output_01.png)
+
+**But `top` is not very user-friendly.**
+
+### `htop`  
+`htop` is a more user friendly `top`, it might not installed by default.
+
+![htop output](assets/htop_output.png)
+
+
+### `bashtop`
+
+`bashtop` is a linux monitoring tool.
+Here is the [github repository](https://github.com/aristocratos/bashtop).
+It looks much nicer than top and htop.
+
+![bashtop output](assets/bashtop.png)
 
 
 ## Log files
@@ -112,3 +177,6 @@ With the command `who` we can see which user is connected, we can also see the d
 ## For next project
 
 https://www.it-connect.fr/linux-recevoir-un-e-mail-lors-dune-connexion-ssh/
+
+
+## test
