@@ -60,11 +60,11 @@ _Not only the processes started by a user or in a terminal session, but also tho
 **Displays more information about the process**
 `ps -ef` 
 
-**PID**: proces ID
-**PPID**: parent process ID
-🚧 **C**
-🚧 **TTY**
-🚧 **CMD**
+**PID**: proces ID  
+**PPID**: parent process ID  
+🚧 **C**  
+🚧 **TTY**  
+🚧 **CMD**  
 
 
 **ps -ef outputs**
@@ -89,9 +89,9 @@ We can see that we run the command `ps -ef` from this terminal.
 **Display the 5 most cpu demanding processes** 
 `ps -edf --sort=+pcpu | tail -5`
 
-### `top`, `htop`...
+### `top`, `htop`, `bashtop`...
 
-### `top`
+#### `top`
 The `top` command displays linux processes in CPU activity order.  
 It is installed by default on a lot of distributions.
 It is the equivalent of the task manager in Windows system.
@@ -101,13 +101,13 @@ Press `h` to have the documentation
 
 **But `top` is not very user-friendly.**
 
-### `htop`  
+#### `htop`  
 `htop` is a more user friendly `top`, it might not installed by default.
 
 ![htop output](assets/htop_output.png)
 
 
-### `bashtop`
+#### `bashtop`
 
 `bashtop` is a linux monitoring tool.
 Here is the [github repository](https://github.com/aristocratos/bashtop).
@@ -127,7 +127,7 @@ rsyslog configuration is in the file /etc/rsyslog.conf
 
 `grep "/var/log" /etc/rsyslog.conf`
 
-Centralize logs of several machines on one server
+`rsyslog` allows to centralize logs of several machines on one server
 
 On my ubuntu vm-client, I just have the folder /etc/rsyslog.d 
 On my ubuntu server, I have the file /etc/rsyslog.conf and the folder /etc/rsyslog.d 
@@ -168,11 +168,29 @@ With the command `who` we can see which user is connected, we can also see the d
 
 ## Network activity
 
-### `ss`  
-`ss -lptun` = modern replacement to `netstat`  
-`ss` stands for socket statistics  
+See: bmon, ipraf, tcdump
 
+### `tcdump`
+
+
+
+### `ss`  
+
+With the commands `ss`you can check which ports are open on a machine.
+`ss` stands for socket statistics  
 🚧 **explain what a socket is**
+
+`ss -lptun`
+
+### `lsof`
+`sudo lsof -Pi` to see
+
+In the header we can see the list of processes, their PID, which user launched them, their [file descriptor](https://linuxtldr.com/file-descriptors-linux/), the protocol and port used, and the state of the connection (LISTEN, ESTABLISHED)
+
+![lsof output 01](assets/lsof_01.png)
+![lsof output 02](assets/lsof_02.png)
+
+
 
 ## For next project
 

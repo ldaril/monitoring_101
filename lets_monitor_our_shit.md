@@ -30,6 +30,29 @@ rsyslog.conf includes all files contained in /etc/rsyslog.d/
 
 ## Ubuntu server
 
+### Display processes
+
+![ps -ef output](assets/ps_output_01.png)
+
+![Untitled](02%20-%20Monitoring%20101%2066aca3d5b5de4a7895715e7984b19bd7/Untitled%207.png)
+
+![Untitled](02%20-%20Monitoring%20101%2066aca3d5b5de4a7895715e7984b19bd7/Untitled%208.png)
+
+ps -ef output
+
+![Untitled](02%20-%20Monitoring%20101%2066aca3d5b5de4a7895715e7984b19bd7/Untitled%209.png)
+
+connection via ssh to the server
+
+![Untitled](02%20-%20Monitoring%20101%2066aca3d5b5de4a7895715e7984b19bd7/Untitled%2010.png)
+
+
+
+The above is the output for the command ps -ef on my linux server machine from the previous project. I'm connected to it via my m
+pts/0 is the session I started via ssh from my main machine with which I connected to ssh to the server.
+ow, whereas tty1 is a session on the system's first virtual console, possibly accessed directly from the machine's physical input and output devices.
+
+
 In the server, I have the following file with the default configuration `/etc/rsyslog.d/50-default.conf`
 
 ### Enable logs reception from other hosts to my server
